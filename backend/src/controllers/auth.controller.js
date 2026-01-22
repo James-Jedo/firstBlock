@@ -32,9 +32,14 @@ export const signup = async  (req, res)=>{
      });
 
      if(newUser){
+      // BEFORE CR
       //  generate a token (JWT) for the user (not implemented here)
-      generateToken(newUser._id,res);
-      await newUser.save();
+      // generateToken(newUser._id,res);
+      // await newUser.save();
+
+      //AFTER CR
+   const savedUser = await newUser.save();
+   generateToken(savedUser._id,res);
       return res.status(201).json({
         _id: newUser._id,
         fullName: newUser.fullName,
