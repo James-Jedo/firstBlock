@@ -38,7 +38,6 @@ export const signup = async  (req, res)=>{
       // await newUser.save();
 
       //AFTER CR  
-      
    const savedUser = await newUser.save();
    generateToken(savedUser._id,res);
       return res.status(201).json({
