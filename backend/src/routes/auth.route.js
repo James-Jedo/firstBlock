@@ -1,16 +1,14 @@
 // const express = require('express')
 import express from "express";
+import { signup } from "../controllers/auth.controller.js";
 const router = express.Router()
 
 router.get("/", (req, res)=>{
     res.send("SERVER RUNNING");
 });
-router.get("/signup", (req, res)=>{
-    res.send("Signup endpoint");
-});
-router.get("/login", (req, res)=>{
-    res.send("Login endpoint");
-});
+
+router.get("/signup", signup);
+
 router.get("/logout", (req, res)=>{
     res.send("Logout endpoint");
 });
