@@ -1,6 +1,9 @@
 import User from "../models/User.js";
 import bcrypt from "bcrypt";
 import { generateToken } from "../lib/utils.js";
+import "dotenv/config";
+import { sendWelcomeEmail } from "../emails/emailHandlers.js";
+
 
 export const signup = async  (req, res)=>{
    const {fullName ,email , password } = req.body;
@@ -38,16 +41,30 @@ export const signup = async  (req, res)=>{
       // await newUser.save();
 
       //AFTER CR  
-   const savedUser = await newUser.save();
+ const savedUser = await newUser.save();
    generateToken(savedUser._id,res);
-      return res.status(201).json({
+
+   // Send welcome email before responding
+   try {
+     await sendWelcomeEmail(savedUser.email, savedUser.fullName, process.env.CLIENT_URL);
+   } catch (error) {
+     console.error("Error sending welcome email:", error);
+     // Continue with response even if email fails
+   }
+
+   return res.status(201).json({
         _id: newUser._id,
         fullName: newUser.fullName,
         email: newUser.email,
         profilePic: newUser.profilePic
-      });
+      })
       //send a welcome email to the user (not implemented here)
       
+      // try {
+      //   await sendWelcomeEmail(savedUser.email, savedUser.fullName, process.env.CLIENT_URL);
+      // } catch (error) {
+      //   console.error("Error sending welcome email:", error);
+      // }
       
      }else{
          res.status(400).json({message:"Invalid user data"});
@@ -58,5 +75,28 @@ export const signup = async  (req, res)=>{
    } catch (error) {
     console.error("Error during signup in signup controller:", error);
      res.status(500).json({message: "Server error during signup"});
+   }
+}
+
+export const testEmail = async (req, res) => {
+  console.log("🧪 TEST-EMAIL ENDPOINT HIT");
+  console.log("Request body:", req.body);
+   const { fullName, email } = req.body;
+   try {
+      if (!fullName || !email) {
+         return res.status(400).json({ message: "fullName and email are required in the body" });
+      }
+
+      // Trigger the welcome email and return the provider response
+      try {
+         const result = await sendWelcomeEmail(email.toLowerCase(), fullName, process.env.CLIENT_URL);
+         return res.status(200).json({ success: true, result });
+      } catch (err) {
+         console.error("Error sending test welcome email:", err);
+         return res.status(500).json({ success: false, error: err.message || String(err) });
+      }
+   } catch (error) {
+      console.error("Error in testEmail endpoint:", error);
+      return res.status(500).json({ message: "Server error" });
    }
 }

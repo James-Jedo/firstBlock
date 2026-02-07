@@ -1,0 +1,29 @@
+
+> backend@1.0.0 dev
+> nodemon src/server.js
+
+[33m[nodemon] 3.1.11[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching path(s): *.*[39m
+[33m[nodemon] watching extensions: js,mjs,cjs,json[39m
+[32m[nodemon] starting `node src/server.js`[39m
+🔍 RESEND_API_KEY: ✅ Present
+📧 Sender configured: { email: 'onboarding@resend.dev', name: 'Jaytech Chat App' }
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  load multiple .env files with { path: ['.env.local', '.env'] }
+Server started on port 3000
+MONGODB CONNECTED:  ac-6pprqaz-shard-00-00.tvoqn7t.mongodb.net
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node src/server.js`[39m
+🔍 RESEND_API_KEY: ✅ Present
+📧 Sender configured: { email: 'onboarding@resend.dev', name: 'Jaytech Chat App' }
+[dotenv@17.2.3] injecting env (0) from .env -- tip: 🔑 add access controls to secrets: https://dotenvx.com/ops
+Server started on port 3000
+MONGODB CONNECTED:  ac-6pprqaz-shard-00-02.tvoqn7t.mongodb.net
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting child process[39m
+[32m[nodemon] starting `node src/server.js`[39m
+🔍 RESEND_API_KEY: ✅ Present
+📧 Sender configured: { email: 'onboarding@resend.dev', name: 'Jaytech Chat App' }
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  load multiple .env files with { path: ['.env.local', '.env'] }
+Server started on port 3000
+MONGODB CONNECTED:  ac-6pprqaz-shard-00-01.tvoqn7t.mongodb.net
