@@ -1,3 +1,4 @@
+import {ENV} from "./env.js";
 // Resend configuration commented out so SMTP (Gmail) can be used for testing.
 // import { Resend } from "resend";
 // import "dotenv/config";
@@ -21,8 +22,8 @@
 
 // Export a `sender` from env for compatibility with existing email handlers.
 export const sender = {
-  email: process.env.EMAIL_FROM || process.env.GMAIL_USER || "jcubayzel@gmail.com",
-  name: process.env.EMAIL_FROM_NAME || "Jaytech Chat App",
+  email: ENV.EMAIL_FROM || ENV.GMAIL_USER || "jcubayzel@gmail.com",
+  name: ENV.EMAIL_FROM_NAME || "Jaytech Chat App",
 };
 
 console.log("📧 Sender configured for SMTP (from env):", sender);

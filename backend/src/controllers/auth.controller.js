@@ -1,7 +1,7 @@
 import User from "../models/User.js";
 import bcrypt from "bcrypt";
 import { generateToken } from "../lib/utils.js";
-import "dotenv/config";
+import {ENV} from "../lib/env.js";
 import { sendWelcomeEmail } from "../emails/emailHandlers.js";
 
 
@@ -46,7 +46,7 @@ export const signup = async  (req, res)=>{
 
    // Send welcome email before responding
    try {
-     await sendWelcomeEmail(savedUser.email, savedUser.fullName, process.env.CLIENT_URL);
+     await sendWelcomeEmail(savedUser.email, savedUser.fullName, ENV.CLIENT_URL);
    } catch (error) {
      console.error("Error sending welcome email:", error);
      // Continue with response even if email fails
@@ -61,7 +61,7 @@ export const signup = async  (req, res)=>{
       //send a welcome email to the user (not implemented here)
       
       // try {
-      //   await sendWelcomeEmail(savedUser.email, savedUser.fullName, process.env.CLIENT_URL);
+      //   await sendWelcomeEmail(savedUser.email, savedUser.fullName, ENV.CLIENT_URL);
       // } catch (error) {
       //   console.error("Error sending welcome email:", error);
       // }
@@ -89,7 +89,7 @@ export const testEmail = async (req, res) => {
 
       // Trigger the welcome email and return the provider response
       try {
-         const result = await sendWelcomeEmail(email.toLowerCase(), fullName, process.env.CLIENT_URL);
+         const result = await sendWelcomeEmail(email.toLowerCase(), fullName, ENV.CLIENT_URL);
          return res.status(200).json({ success: true, result });
       } catch (err) {
          console.error("Error sending test welcome email:", err);

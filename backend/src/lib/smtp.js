@@ -1,8 +1,8 @@
 import nodemailer from "nodemailer";
-import "dotenv/config";
+import {ENV} from "./env.js";
 
-const user = process.env.GMAIL_USER;
-const pass = process.env.GMAIL_PASS; // Use an App Password for Gmail
+const user = ENV.GMAIL_USER;
+const pass = ENV.GMAIL_PASS; // Use an App Password for Gmail
 
 console.log("🔍 GMAIL_USER:", user ? "✅ Present" : "❌ Missing");
 console.log("🔍 GMAIL_PASS:", pass ? "✅ Present" : "❌ Missing");
